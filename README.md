@@ -1,170 +1,68 @@
-# Project 2 - Ames Housing Data and Kaggle Challenge
-
-Welcome to Project 2! Let's model!
-
-**Primary Learning Objectives:**
-1. Creating and iteratively refining a regression model.
-2. Using [Kaggle](https://www.kaggle.com/t/ff32f6689d5b45aeb23d1441122b7761) to practice the modeling process.
-3. Providing business insights through reporting and presentation.
-
-You are tasked with creating a machine learning model based on the Ames Housing Dataset. This model will predict the price of a house at sale.
-
-The Ames Housing Dataset is contains over 70 columns of different features relating to houses.
-
----
-## Deliverables 
-
-- We are hosting a competition on Kaggle to give you the opportunity to practice your modeling skills. You must upload at least one of your model's predictions to the competition.
-- You will submit a technical report and a presentation in your submission Repo. 
-- You will present your findings to your classmates and instructors.
-
-**You may find that the best model for Kaggle is not the best model to address your data science problem.**
+# In-Demand Real Estate Development in Ames, IA
 
 
-## Set up
+### Table of Contents
 
-Before you begin working on this project, please do the following:
+- [Problem Statement](#Problem-Statement)
+- [Data & Resources](#Data & Resources)
+- [Data Dictionary](#Data Dictionary)
+- [EDA & Analysis](#EDA & Analysis)
+- [Conclusion & Recommendations](#Conclusion & Recommendations)
+- [Next Steps](#Next Steps)
+- [Acknowledgements](#Acknowledgements)
 
-1. Sign up for an account on [Kaggle](https://www.kaggle.com/)
-2. **IMPORTANT**: Click here: [Regression Challenge Sign Up](https://www.kaggle.com/t/bbb6b0d99517498e98bc9d455eff6f9e) to **join** the competition (otherwise you will not be able to make submissions!)
-3. Review the material on the Kaggle challenge site.
-4. Review the [data description](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt).
+-------------------------
 
-## The Modeling Process
+### Problem Statement
 
-1. The train dataset has all of the columns that you will need to generate and refine your models. The test dataset has all of those columns except for the target that you are trying to predict in your Regression model.
-2. Generate your regression model using the training data. We expect that within this process, you'll be making use of:
-    - train-test split
-    - cross-validation / grid searching for hyperparameters
-    - strong exploratory data analysis to question correlation and relationship across predictive variables
-    - code that reproducibly and consistently applies feature transformation (such as the preprocessing library)
-3. Predict the values for your target column in the test dataset and submit your predictions to Kaggle to see how your model does against unknown data.
-    - **Note**: Kaggle expects to see your submissions in a specific format. Check the challenge's page to make sure you are formatting your CSVs correctly!
-    - **You are limited to models you've learned in class**. In other words, you cannot use XGBoost, Neural Networks or any other more advanced model for this project.
-4. Evaluate your models!
-    - consider your evaluation metrics
-    - consider your baseline score
-    - how can your model be used for inference?
-    - why do you believe your model will generalize to new data?
+Ames, IA is an agriculturally-rich town in located in central Iowa. It is the eighth largest city in Iowa and home to Iowa State University. It was ranked ninth on CNNMoney's "[Best Places to Live](#https://money.cnn.com/magazines/moneymag/bplive/2010/)" list in 2010. 
 
-## Submission
+The city has expanded considerably in the past two decades, with the total population expanding 30% from 50,731 residents in 2000 to 66,258 in 2019. Ames added over 5000 housing units in the years between 2000 and 2010, and while the 2020 census information has not been tabulated, the city's growth suggests that the total number of housing units also grew in the last decade. 
 
-- Presentation will be delivered starting at 0900 on **Monday 14 December**. 
-- Your technical report must be submitted in your submission repository by 23:59 on **Monday 14 December**.
-- The Kaggle competition will close by midnight **Monday 14 December**.
+The municipality's steady growth means that builders are looking to construct homes that meet the needs of modern invididuals and families. To that end, the analysis detailed below is looking at what key construction features make the house the most appealing to home buyers and thereby garner a higher sale price. 
 
-Your technical report must include:
+The analysis investigates the relationship between the sale price of a house and any bonus auxiliary structures -- i.e. basements, garages, and any other space adjacent to the main living area that could be used as storage or be used as alternative/additonal living or activity places while being separate from the main space in the house. My analysis focused on basements and garages, but a project of a larger scope could look at sheds, cover patios, attached dwelling units, and other enclosed areas. The data shows that including at least one of these features will increase the home price considerably, so this is an important item for housing developers to consider. 
 
-- A README.md (that isn't this file)
-- Jupyter notebook(s) with your analysis and models (renamed to describe your project)
-- Data files
-- Presentation slides
-- Any other necessary files (images, etc.)
+### Data & Resources 
 
++ The Ames, IA real estate data comes from the Ames Assessor's office and contains records from individual property sales in the municipality from 2006 to 2010. It has been used to compute assessed values for residential properties. 
+    - Reference URL: [Data Description](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt)
+    - [Data Dictionary](https://www.kaggle.com/c/dsir-1116-ames-regression-challenge/data)
+    
++ The Ames, IA population counts and other census data came from the [Ames' Wikipedia page](https://en.wikipedia.org/wiki/Ames,_Iowa#2010_census).
 
----
+### EDA & Analysis 
 
-## Presentation Structure
+Once I read in the Ames, IA real estate training set, I performed preprocessing that included handling null values and checking for sensible values. I then created basic exploratory visualization, including heatmaps and pairplots, to investigate more obvious trends. 
 
-- **Must be within time limit established by local instructor.**
-- Use Google Slides or some other presentation system (Keynote, Powerpoint, etc).
-- Consider your audience. 
-- Start with the **problem** you are solving.
-- Use visuals that are appropriately scaled and interpretable.
-- Talk about your procedure/methodology (high level).
-- Talk about your primary findings.
-- Make sure you provide **clear recommendations** that follow logically from your analyses and narrative and answer your data science problem.
+I used the clean data to build a series of models. For each model, I selected a set of features as my X, set the SalePrice column as my target variable y, performed a train-test split, scaled the training data, instantiated the model, fit it on the training data, scored it using both train and test sets, and then made predictions for the Ames Housing test real estate data which is separate from the test data I split off from my training set. 
 
-Be sure to rehearse and time your presentation before class.
+The sets of features I used for the models can essentially be described as the following subsets: 
+1. Numeric columns that required no dummifying or engineering (except for dealing with nulls and outliers). 
+2. The numeric columns in No. 1 as well a selection of columns describing the house's garage or lack thereof.
+3. The numeric and garage-related variable in Nos. 1 and 2 as well as a selection of columns describing the house's basement or lack thereof. The selection of which garage- and basement-related columns to dummify and use were based in those that seemed to have the strongest correlation according to the correlation table and heat map, and I also paid attention to multicollinearity when selecting these features.  
 
----
+I ran a linear regression, ridge regression, and cross-validated lasso regression. The ridge regression model fit on the numeric, garage, and basement-related columns (the third subset detailed above) performed the best at predictin the sale prices for the Ames Housing test set, with a test RMSE score of 28034.2. 
 
-## Rubric
-Your local instructor will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
+In addition to making the sale price predictions, I did some analysis on the training set to look for the relationship between the garage and basement features and the sale price-- i.e. which features and categories contributed to higher sale prices. 
 
-**Scores will be out of 27 points based on the 9 items in the rubric.** <br>
-*3 points per section*<br>
+### Conclusion and Recommendations 
 
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
+The latter part of my analysis shows that both garages and basements can have a significant effect on home prices. 
 
-### The Data Science Process
+In the ridge regressor model that yielded the most accurate predictions, several basement and garage features proved to have the largest coefficients, indicating a powerful correlation. The coefficient for the total basement square feet was 28444, meaning that the house price increases by $28,444 for every unit increase of basement square footage when all other variables are held constant. Other variables with the highest or lowest coefficients (indicating postive or negative correlation) were: Garage Cars (how many cars the garage is made to fit), basement quality, garage size, basement exposure, garage condition, and the binary of whether or not a house has a garage.
 
-**Problem Statement**
-- Is it clear?
-- Is it reasonable?
-- Is the audience clearly identified?
+A groupby analysis on the Ames housing data also showed that the basements with higher ceilings had much higher mean sale price than those with lower ceilings. Additionally, the size of the basement has a linear relationship with the sale price. Finally, the type of garage seemed to be a significant factor, as houses with garages that are adjacent to the main house (built-in, attached, and basement garages) had mean sale prices above $150,000, while house with detached garages or car port garnered prices below $150,000. 
 
-**Data Cleaning and EDA**
-- Are missing values dealt with?
-- Are important distributions examined and described?
-- Are outliers identified and addressed?
-- Are appropriate summary statistics provided?
-- Are possible modeling insights to investigate discussed?
+Based on this analysis, I would recommend to any real estate developer that they strongly consider including either a finished basement or adjacent garage in their development plans. The data tells us that this is a basic way to increase the value of a home. 
 
-**Preprocessing and Modeling**
-- Are categorical variables one-hot encoded or encoded in another logical way?
-- Are features engineered?
-- Have the data been scaled appropriately?
-- Does the student properly split the data for validation/training purposes?
-- Does the student use feature selection to remove noisy or multi-collinear features?
-- Does the student test and evaluate a variety of model types (**AT MINIMUM:** linear regression, lasso, and ridge)?
-- Does the student defend their choice of the best model for this data and problem statement?
-- Does the student explain how the model works and evaluate its performance successes/downfalls?
+### Next Steps 
 
-**Evaluation and Conceptual Understanding**
-- Does the student accurately identify and explain the baseline score?
-- Does the student select and use metrics relevant to the problem statement?
-- Is more than one metric uses to better assess performance?
-- Does the student correctly interpret the results of their model for purposes of inference?
+Further analysis is needed to understand the interaction between the garage, the basement, and the rest of the house. While these are independently strongly-correlated variables, an important next step would be to see how they interact with and/or compound one another (through Polynomial feature engineering) and how they are impacted by other variables. From there, common sense and domain knowledge can help us know whether one or the other - a garage or basemenet - is better suited to a given property or house.
 
-**Conclusion and Recommendations**
-- Are the conclusions/recommendations clearly stated?
-- Does the conclusion answer the original problem statement?
-- Is it clear how the final recommendations were reached? Do they follow logically?
-- Does the student address how their suggestions will likely benefit stakeholders?
-- Are future steps to move the project forward identified?
+Also important to look at our how these features relate to the topography and other land features. I would also want to look at hose these features are related to the neighborhood the house is in. 
 
-### Organization and Professionalism
+### Acknowledgements
 
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths (so someone can replicate your analysis)?
-- Does the README provide a good executive summary of the project?
-- Is Markdown formatting and comments used appropriately to communicate in the notebooks?
-- Are files & directories organized?
-- Are unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
+Thank you to Charlie Rice, John Hazard, and Prasoon Karmacharya for their invaluable support in putting this project together! 
 
-**Visualizations**
-- Are sufficient helpful visualizations provided?
-- Are plots labeled properly?
-- Are plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
-
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follow general best practices?
-
-**Presentation**
-- Is the problem statement clearly presented?
-- Does the body of the presentation building address the problem statement and lead to the conclusion?
-- Is the conclusion/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Does the student deliver their message clearly?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations useful for supporting conclusions/explaining findings?
-
-In order to pass the project, students must earn a minimum score of 1 for each category.
-- Earning below a 1 in one or more of the above categories would result in a failing project.
-- While a minimum of 1 in each category is the required threshold for graduation, students should aim to earn at least an average of 1.5 across each category. An average score below 1.5, while it may be passing, means students may want to solicit specific feedback in order to significantly improve the project before showcasing it as part of a portfolio or the job search.
-
-### REMEMBER:
-
-This is a learning environment and you are encouraged to try new things, even if they don't work out as well as you planned! While this rubric outlines what we look for in a _good_ project, it is up to you to go above and beyond to create a _great_ project. **Learn from your failures and you'll grow!**
