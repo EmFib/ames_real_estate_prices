@@ -23,6 +23,8 @@ The municipality's steady growth means that builders are looking to construct ho
 
 The analysis investigates the relationship between the sale price of a house and any bonus auxiliary structures -- i.e. basements, garages, and any other space adjacent to the main living area that could be used as storage or be used as alternative/additonal living or activity places while being separate from the main space in the house. My analysis focused on basements and garages, but a project of a larger scope could look at sheds, cover patios, attached dwelling units, and other enclosed areas. The data shows that including at least one of these features will increase the home price considerably, so this is an important item for housing developers to consider. 
 
+_Note to reader: In this repo's `code` directory, you will find three non-archived notebooks (EDA & Modeling, Feature Engineering and Model Building,  and Data visualization for Presentation). For your own sustenance and well-being, please only explore the one titled `EDA & Modeling`. The other two are nearly identical and won't add anything to your experience. 
+
 ### Data & Resources 
 
 + The Ames, IA real estate data comes from the Ames Assessor's office and contains records from individual property sales in the municipality from 2006 to 2010. It has been used to compute assessed values for residential properties. 
