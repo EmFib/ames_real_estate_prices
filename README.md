@@ -4,11 +4,10 @@
 ### Table of Contents
 
 - [Problem Statement](#Problem-Statement)
-- [Data & Resources](#Data & Resources)
-- [Data Dictionary](#Data Dictionary)
-- [EDA & Analysis](#EDA & Analysis)
-- [Conclusion & Recommendations](#Conclusion & Recommendations)
-- [Next Steps](#Next Steps)
+- [Data & Resources](#Data-&-Resources)
+- [EDA & Analysis](#EDA-&-Analysis)
+- [Conclusion & Recommendations](#Conclusion-&-Recommendations)
+- [Next Steps](#Next-Steps)
 - [Acknowledgements](#Acknowledgements)
 
 -------------------------
